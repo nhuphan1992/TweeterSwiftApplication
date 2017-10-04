@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        self.setupWindows()
+        
         return true
     }
 
@@ -87,6 +90,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    // MARK: - Methods
+    func setupWindows() {
+        let window = UIWindow()
+        window.frame = UIScreen.main.bounds
+        
+        let vc:UIViewController = HomeViewController()
+        let rootVC = UINavigationController(rootViewController: vc)
+        window.rootViewController = rootVC
+        rootVC.isNavigationBarHidden = true
+        
+        self.window = window
+        window.makeKeyAndVisible()
     }
 
 }
