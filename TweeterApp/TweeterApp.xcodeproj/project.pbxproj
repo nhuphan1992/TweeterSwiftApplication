@@ -17,6 +17,8 @@
 		4C937C101F84A19F00A54348 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C937C0F1F84A19F00A54348 /* Theme.swift */; };
 		4C937C131F84A1FE00A54348 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C937C121F84A1FE00A54348 /* HomeViewController.swift */; };
 		4C937C151F84A61A00A54348 /* UIExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C937C141F84A61A00A54348 /* UIExtentions.swift */; };
+		4C937C191F84AED400A54348 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C937C181F84AED400A54348 /* MessageCell.swift */; };
+		4C937C1B1F84AFB600A54348 /* InputMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C937C1A1F84AFB600A54348 /* InputMessageView.swift */; };
 		71583710D669A2DCAF602966 /* Pods_TweeterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E893F9BC16523BB278F839 /* Pods_TweeterApp.framework */; };
 		97835EDBAAA41BCEFB30620B /* Pods_TweeterAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFF107D59B93473E6751723C /* Pods_TweeterAppTests.framework */; };
 		A970B4BBF17972AB69DE7C2C /* Pods_TweeterAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97473760F1C8C8A8EA3BFC59 /* Pods_TweeterAppUITests.framework */; };
@@ -57,6 +59,8 @@
 		4C937C0F1F84A19F00A54348 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		4C937C121F84A1FE00A54348 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4C937C141F84A61A00A54348 /* UIExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtentions.swift; sourceTree = "<group>"; };
+		4C937C181F84AED400A54348 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		4C937C1A1F84AFB600A54348 /* InputMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMessageView.swift; sourceTree = "<group>"; };
 		68E893F9BC16523BB278F839 /* Pods_TweeterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TweeterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8503D5235734D6C1B78195C4 /* Pods-TweeterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TweeterApp/Pods-TweeterApp.release.xcconfig"; sourceTree = "<group>"; };
 		8522543B2D9B1786DC61280F /* Pods-TweeterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeterApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TweeterApp/Pods-TweeterApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,9 +198,27 @@
 		4C937C111F84A1BC00A54348 /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				4C937C171F84AE9C00A54348 /* View */,
+				4C937C161F84AE7F00A54348 /* Cell */,
 				4C937C121F84A1FE00A54348 /* HomeViewController.swift */,
 			);
 			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		4C937C161F84AE7F00A54348 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4C937C181F84AED400A54348 /* MessageCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		4C937C171F84AE9C00A54348 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4C937C1A1F84AFB600A54348 /* InputMessageView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		6C387E1F686457AC046E0E52 /* Frameworks */ = {
@@ -508,6 +530,8 @@
 				4C937BDA1F839A5600A54348 /* AppDelegate.swift in Sources */,
 				4C937C151F84A61A00A54348 /* UIExtentions.swift in Sources */,
 				4C937C131F84A1FE00A54348 /* HomeViewController.swift in Sources */,
+				4C937C1B1F84AFB600A54348 /* InputMessageView.swift in Sources */,
+				4C937C191F84AED400A54348 /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

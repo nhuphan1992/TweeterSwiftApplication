@@ -265,6 +265,11 @@ class Theme {
     func text_App_Name() -> String {
         return ""
     }
+    
+    // MARk: Size
+    func common_margin() -> CGFloat {
+        return CGFloat(15)
+    }
 }
 
 class DefaultTheme: Theme {
@@ -272,6 +277,10 @@ class DefaultTheme: Theme {
 
     override func text_App_Name() -> String {
         return "Tweeter"
+    }
+    
+    func text_PlaceHolder_Input_Message() -> String {
+        return "Enter your message here."
     }
 }
 

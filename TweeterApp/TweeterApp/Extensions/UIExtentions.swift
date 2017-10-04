@@ -77,3 +77,66 @@ extension UIColor {
         )
     }
 }
+
+extension UIView {
+    func setLayer(cornerRadius: CGFloat = 0, borderWidth: CGFloat = 0, borderColor: CGColor = UIColor.white.cgColor, masksToBounds: Bool = false) {
+        self.layer.cornerRadius = cornerRadius
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = borderColor
+        self.layer.masksToBounds = masksToBounds
+    }
+    
+    func setShadow(shadowColor : UIColor, shadowRadius: CGFloat, shadowOpacity: Float, shadowOffset: CGSize)
+    {
+        self.layer.shadowColor = shadowColor.cgColor
+        self.layer.shadowRadius = shadowRadius
+        self.layer.shadowOpacity = shadowOpacity
+        self.layer.shadowOffset = shadowOffset
+    }
+}
+
+extension UITextField{
+    @IBInspectable var placeHolderColor: UIColor? {
+        get {
+            return self.placeHolderColor
+        }
+        set {
+            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSAttributedStringKey.foregroundColor: newValue!])
+        }
+    }
+    
+    func addLeftView(margin: CGFloat) {
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: margin, height: 30))
+        self.leftView = leftView
+        self.leftViewMode = .always
+    }
+    
+    func addRightView(margin: CGFloat) {
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: margin, height: 30))
+        self.rightView = rightView
+        self.rightViewMode = .always
+    }
+    
+    func setProperties(textAlignment: NSTextAlignment = .left, textColor: UIColor = .black, placeHolderText: String = "", font: UIFont = UIFont.systemFont(ofSize: 14), delegate: UITextFieldDelegate? = nil) {
+        self.textAlignment = textAlignment
+        self.placeholder = placeHolderText
+        self.textColor = textColor
+        self.font = font
+        self.delegate = delegate
+    }
+}
+
+extension UITableView {
+    func setProperties(backgroundColor: UIColor = .white, allowsSelection: Bool = true, delegate: UITableViewDelegate? = nil, dataSource: UITableViewDataSource? = nil, separatorStyle: UITableViewCellSeparatorStyle = .none, bounces: Bool = true, rowHeight:CGFloat = 60) {
+        self.allowsSelection = allowsSelection
+        self.delegate = delegate
+        self.dataSource = dataSource
+        self.backgroundColor = backgroundColor
+        self.separatorStyle = separatorStyle
+        self.bounces = bounces
+        self.estimatedRowHeight = 200
+        self.rowHeight = rowHeight
+    }
+}
+
+
