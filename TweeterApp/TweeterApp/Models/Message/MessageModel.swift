@@ -40,9 +40,9 @@ class MessageModel {
         }
     }
     
-    static func fetchObjects(offset:Int, limit: Int) -> [MessageModel] {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
+    static func fetchObjects(context: NSManagedObjectContext, offset:Int, limit: Int) -> [MessageModel] {
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let context = appDelegate.persistentContainer.newBackgroundContext()
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: tableName)
         fetchRequest.fetchOffset = offset

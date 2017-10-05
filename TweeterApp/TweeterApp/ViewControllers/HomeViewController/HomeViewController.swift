@@ -77,8 +77,11 @@ class HomeViewController: UIViewController {
         }
         self.tableView.tableFooterView?.isHidden = false
         (self.tableView.tableFooterView as? UIActivityIndicatorView)?.startAnimating()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.newBackgroundContext()
         DispatchQueue.global().async {
-            let newItems = MessageModel.fetchObjects(offset: self.offsetData, limit: self.limitNumber)
+            let newItems = MessageModel.fetchObjects(context: context, offset: self.offsetData, limit: self.limitNumber)
             DispatchQueue.main.async {
                 self.items.append(contentsOf: newItems)
                 self.offsetData = self.items.count - 1
