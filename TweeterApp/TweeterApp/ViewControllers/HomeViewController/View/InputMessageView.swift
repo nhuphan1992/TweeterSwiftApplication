@@ -26,14 +26,23 @@ class InputMessageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     // MARK: Setup UI
     func setupViews() {
         self.addSubview(textField)
         self.addSubview(btnSend)
+        
+        self.backgroundColor = DefaultTheme.shareObject.color_WhiteColor()
+        self.setLayer(cornerRadius: 3,
+                      borderWidth: 1,
+                      borderColor: DefaultTheme.shareObject.color_App().cgColor,
+                      masksToBounds: true)
+        
         textField.setProperties(textAlignment: .left,
                                 textColor: DefaultTheme.shareObject.color_Text(),
                                 placeHolderText: DefaultTheme.shareObject.text_PlaceHolder_Input_Message(),
-                                font: DefaultTheme.shareObject.font_primaryLight(size: .Small))
+                                font: DefaultTheme.shareObject.font_primaryLight(size: .Small),
+                                delegate: self)
         
         btnSend.addTarget(self, action: #selector(userTappedBtn(btn:)), for: .touchUpInside)
         btnSend.setImage(UIImage(named: "icon_send"), for: .normal)
@@ -57,11 +66,25 @@ class InputMessageView: UIView {
         }
     }
     
+    
     // MARK: Handle Event
     @objc func userTappedBtn(btn: UIButton)
     {
         if btn == self.btnSend {
             self.delegate?.userFinishedInputingMessage(message: self.textField.text ?? "")
         }
+    }
+    
+    
+    // MARK: Methods
+    func clear() {
+        self.textField.text = ""
+    }
+}
+
+extension InputMessageView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.delegate?.userFinishedInputingMessage(message: self.textField.text ?? "")
+        return true
     }
 }

@@ -95,7 +95,8 @@ class Theme {
     }
     
     func color_Table_Background() -> UIColor {
-        return UIColor(netHex: 0xF1F8E9)
+        return UIColor.clear
+        //return UIColor(netHex: 0xF1F8E9)
     }
     
     func color_Text() -> UIColor {
