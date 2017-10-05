@@ -206,12 +206,21 @@ extension HomeViewController: InputMessageViewDelegate {
         
         self.inputMessageView.clear()
         
-        if let msg = MessageModel.saveObject(message: message, time: Date()) {
-            self.items.insert(msg, at: 0)
-            self.offsetData = self.offsetData + 1
+        if let subMessages = MessageModel.splitMessage(message: message) {
+            print(message)
+            print(subMessages)
+            for subMessage in subMessages {
+                if let msg = MessageModel.saveObject(message: subMessage, time: Date()) {
+                    self.items.insert(msg, at: 0)
+                    self.offsetData = self.offsetData + 1
+                }
+            }
             self.tableView.reloadData()
             let firstIndex = IndexPath(item: 0, section: 0)
             self.tableView.scrollToRow(at: firstIndex, at: .middle, animated: true)
+        } else {
+            print("Cannot split this message")
         }
+        
     }
 }
