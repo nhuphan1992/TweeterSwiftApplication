@@ -204,9 +204,8 @@ extension HomeViewController: InputMessageViewDelegate {
             return
         }
         
-        self.inputMessageView.clear()
-        
         if let subMessages = MessageModel.splitMessage(message: message) {
+            
             print(message)
             print(subMessages)
             for subMessage in subMessages {
@@ -218,8 +217,17 @@ extension HomeViewController: InputMessageViewDelegate {
             self.tableView.reloadData()
             let firstIndex = IndexPath(item: 0, section: 0)
             self.tableView.scrollToRow(at: firstIndex, at: .middle, animated: true)
+            self.inputMessageView.clear()
+            
         } else {
-            print("Cannot split this message")
+            
+            let alertViewController = UIAlertController(title: "",
+                                                        message: "The message contains a span of non-whitespace characters longer than \(MessageModel.maximumLenghtOfMessage), please check your message", preferredStyle: .actionSheet)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: {[weak self] (action) in
+                self?.dismiss(animated: true, completion: nil)
+            })
+            alertViewController.addAction(alertAction)
+            self.present(alertViewController, animated: true, completion: nil)
         }
         
     }

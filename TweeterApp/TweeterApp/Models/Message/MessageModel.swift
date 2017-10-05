@@ -14,7 +14,7 @@ class MessageModel {
     static private let tableName = "Message"
     static private let keyMessage = "message"
     static private let keyTime = "time"
-    static private let maximumLenghtOfMessage = 50
+    static let maximumLenghtOfMessage = 50
     var message: String = ""
     var date: Date = Date()
     
