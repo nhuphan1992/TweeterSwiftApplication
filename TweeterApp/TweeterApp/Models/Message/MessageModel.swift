@@ -14,7 +14,7 @@ class MessageModel {
     static private let tableName = "Message"
     static private let keyMessage = "message"
     static private let keyTime = "time"
-    static let maximumLenghtOfMessage = 50
+    
     var message: String = ""
     var date: Date = Date()
     
@@ -41,8 +41,6 @@ class MessageModel {
     }
     
     static func fetchObjects(context: NSManagedObjectContext, offset:Int, limit: Int) -> [MessageModel] {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegate.persistentContainer.newBackgroundContext()
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: tableName)
         fetchRequest.fetchOffset = offset
@@ -72,53 +70,5 @@ class MessageModel {
         } catch  {
             return []
         }
-        return []
-    }
-    
-    static func splitMessage(message: String) -> [String]? {
-        if (message.characters.count < maximumLenghtOfMessage) {
-            return [message]
-        }
-        
-        let words = message.split(separator: " ")
-        
-        for word in words {
-            if word.characters.count > maximumLenghtOfMessage {
-                return nil
-            }
-        }
-        
-        let guestNumberOfMessages = message.characters.count / maximumLenghtOfMessage + 1
-        let strlenghtOfNumber = String(guestNumberOfMessages).characters.count * 2 + 1
-        let realLenghtOfAll = message.characters.count + guestNumberOfMessages * (strlenghtOfNumber)
-        let finalGuestNumberOfMessages = realLenghtOfAll / maximumLenghtOfMessage + 1
-        let realLenghtNeedToSplit = message.characters.count / finalGuestNumberOfMessages + 1
-        
-        var results: [String] = []
-        var sentence: String = ""
-        for word in words {
-            let futureSentence = sentence + " " + word
-            if futureSentence.characters.count > realLenghtNeedToSplit {
-                if (sentence.characters.count == 0)
-                {
-                    return nil
-                }
-                results.append(sentence)
-                sentence = String(word)
-            } else
-            {
-                sentence = sentence + " " + word
-            }
-        }
-        
-        if sentence.characters.count > 0 {
-            results.append(sentence)
-        }
-        let count = results.count
-        var index = 0
-        return results.map({ (item) -> String in
-            index = index + 1
-            return "\(index)/\(count) \(item)"
-        })
     }
 }

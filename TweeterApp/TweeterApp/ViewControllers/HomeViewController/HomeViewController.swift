@@ -12,38 +12,39 @@ class HomeViewController: UIViewController {
     
     let tableView = UITableView()
     let inputMessageView = InputMessageView(frame: CGRect.zero)
-    var isAnimating: Bool = false
-    var items:[MessageModel] = []
-    var offsetData = 0
-    let limitNumber = 3
+    
+    let viewModel = HomeViewModel()
+    var isAnimatingKeyboard: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViews()
         self.setupTapGesture()
         self.setupKeyBoardListen()
-        self.fetchMoreDataAndReloadTable()
+
+        viewModel.delegate = self
+        viewModel.fetchMoreData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DefaultTheme.shareObject.setupNavigationBar(vc: self,
-                                                    title: DefaultTheme.shareObject.text_App_Name(),
-                                                    tintColor: DefaultTheme.shareObject.color_Text(),
-                                                    leftText: nil,
-                                                    leftImage: nil,
-                                                    leftSelector: nil,
-                                                    rightText: nil,
-                                                    rightImage: nil,
-                                                    rightSelector: nil,
-                                                    isDarkBackground: false,
-                                                    isTransparent: true)
+        DefaultTheme.shareObject
+            .setupNavigationBar(vc: self,
+                                title: DefaultTheme.shareObject.text_App_Name(),
+                                tintColor: DefaultTheme.shareObject.color_Text(),
+                                leftText: nil,
+                                leftImage: nil,
+                                leftSelector: nil,
+                                rightText: nil,
+                                rightImage: nil,
+                                rightSelector: nil,
+                                isDarkBackground: false,
+                                isTransparent: true)
     }
     
     // MARK: - Setup Views
     func setupViews() {
         self.view.backgroundColor = DefaultTheme.shareObject.color_App()
-        self.automaticallyAdjustsScrollViewInsets = false
         self.view.addSubview(tableView)
         self.view.addSubview(inputMessageView)
         
@@ -69,29 +70,6 @@ class HomeViewController: UIViewController {
         
         //inputmessageview
         inputMessageView.delegate = self
-    }
-    
-    func fetchMoreDataAndReloadTable() {
-        if (self.tableView.tableFooterView as? UIActivityIndicatorView)!.isAnimating {
-            return
-        }
-        self.tableView.tableFooterView?.isHidden = false
-        (self.tableView.tableFooterView as? UIActivityIndicatorView)?.startAnimating()
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.newBackgroundContext()
-        DispatchQueue.global().async {
-            let newItems = MessageModel.fetchObjects(context: context, offset: self.offsetData, limit: self.limitNumber)
-            DispatchQueue.main.async {
-                self.items.append(contentsOf: newItems)
-                self.offsetData = self.items.count - 1
-                (self.tableView.tableFooterView as? UIActivityIndicatorView)?.stopAnimating()
-                self.tableView.tableFooterView?.isHidden = true
-                if newItems.count > 0 {
-                    self.tableView.reloadData()
-                }
-            }
-        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -140,11 +118,11 @@ class HomeViewController: UIViewController {
             let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
             let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
             if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
-                if isAnimating == true {
+                if isAnimatingKeyboard == true {
                     return
                 }
                 
-                isAnimating = true
+                isAnimatingKeyboard = true
                 UIView.animate(withDuration: duration/Double(4),
                                delay: TimeInterval(0),
                                options: animationCurve,
@@ -156,7 +134,7 @@ class HomeViewController: UIViewController {
                                 self.view.layoutIfNeeded()
                 },
                                completion : { (completed) in
-                                self.isAnimating = false
+                                self.isAnimatingKeyboard = false
                 })
                 
             } else {
@@ -174,18 +152,18 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return viewModel.getMessagesCount()
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as? MessageCell else {
             return UITableViewCell()
         }
-        cell.reload(message: items[indexPath.row])
+        cell.reload(message: viewModel.getMessageModel(index: indexPath.row))
         cell.transform = CGAffineTransform(rotationAngle:(CGFloat)(Double.pi));
-        
-        if (indexPath.row == self.items.count - 1) {
-            self.fetchMoreDataAndReloadTable()
+
+        if (indexPath.row == viewModel.getMessagesCount() - 1) {
+            viewModel.fetchMoreData()
         }
         return cell
     }
@@ -198,6 +176,28 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
+extension HomeViewController: HomeViewModelDelegate {
+    func didChangeMessages(isAddingNewMessage: Bool) {
+        if isAddingNewMessage {
+            let firstIndex = IndexPath(item: 0, section: 0)
+            self.tableView.scrollToRow(at: firstIndex, at: .middle, animated: true)
+            self.inputMessageView.clear()
+        } else {
+            self.tableView.tableFooterView?.isHidden = false
+            (self.tableView.tableFooterView as? UIActivityIndicatorView)?.startAnimating()
+        }
+        self.tableView.reloadData()
+    }
+    
+    func willChangeMessages(isAddingNewMessage: Bool) {
+        if isAddingNewMessage {
+            // Do nothing
+        } else {
+            self.tableView.tableFooterView?.isHidden = true
+            (self.tableView.tableFooterView as? UIActivityIndicatorView)?.stopAnimating()
+        }
+    }
+}
 
 extension HomeViewController: InputMessageViewDelegate {
     func userFinishedInputingMessage(message: String) {
@@ -207,31 +207,20 @@ extension HomeViewController: InputMessageViewDelegate {
             return
         }
         
-        if let subMessages = MessageModel.splitMessage(message: message) {
-            
-            print(message)
-            print(subMessages)
-            for subMessage in subMessages {
-                if let msg = MessageModel.saveObject(message: subMessage, time: Date()) {
-                    self.items.insert(msg, at: 0)
-                    self.offsetData = self.offsetData + 1
-                }
-            }
-            self.tableView.reloadData()
-            let firstIndex = IndexPath(item: 0, section: 0)
-            self.tableView.scrollToRow(at: firstIndex, at: .middle, animated: true)
-            self.inputMessageView.clear()
-            
+        if let subMessages = Helper.splitMessage(message: message) {
+
+            viewModel.save(messages: subMessages)
+
         } else {
-            
+
             let alertViewController = UIAlertController(title: "",
-                                                        message: "The message contains a span of non-whitespace characters longer than \(MessageModel.maximumLenghtOfMessage), please check your message", preferredStyle: .actionSheet)
+                                                        message: "The message contains a span of non-whitespace characters longer than \(Helper.maximumLenghtOfMessage), please check your message", preferredStyle: .actionSheet)
             let alertAction = UIAlertAction(title: "OK", style: .default, handler: {[weak self] (action) in
                 self?.dismiss(animated: true, completion: nil)
             })
             alertViewController.addAction(alertAction)
             self.present(alertViewController, animated: true, completion: nil)
+            
         }
-        
     }
 }

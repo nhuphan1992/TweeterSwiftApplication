@@ -9,7 +9,7 @@
 import XCTest
 @testable import TweeterApp
 
-class MessageModelTest: XCTestCase {
+class HelperTest: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -53,7 +53,7 @@ class MessageModelTest: XCTestCase {
         //Test length of sub-message
         var prefixStrings: [String] = []
         subMessages?.forEach({ (item) in
-            XCTAssertLessThanOrEqual(item.characters.count, MessageModel.maximumLenghtOfMessage)
+            XCTAssertLessThanOrEqual(item.characters.count, Helper.maximumLenghtOfMessage)
             let prefixString = String(item.split(separator: " ").first!)
             prefixStrings.append(prefixString)
         })
@@ -69,12 +69,12 @@ class MessageModelTest: XCTestCase {
         //Test the general result
         let subMessages = MessageModel.splitMessage(message: message)
         XCTAssertNotNil(subMessages)
-        XCTAssertGreaterThanOrEqual(subMessages!.count, (message.characters.count/MessageModel.maximumLenghtOfMessage))
+        XCTAssertGreaterThanOrEqual(subMessages!.count, (message.characters.count/Helper.maximumLenghtOfMessage))
         
         //Test length of sub-message
         var prefixStrings: [String] = []
         subMessages?.forEach({ (item) in
-            XCTAssertLessThanOrEqual(item.characters.count, MessageModel.maximumLenghtOfMessage)
+            XCTAssertLessThanOrEqual(item.characters.count, Helper.maximumLenghtOfMessage)
             let prefixString = String(item.split(separator: " ").first!)
             prefixStrings.append(prefixString)
         })

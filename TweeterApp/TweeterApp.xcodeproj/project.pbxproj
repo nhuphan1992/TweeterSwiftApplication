@@ -19,8 +19,10 @@
 		4C937C151F84A61A00A54348 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C937C141F84A61A00A54348 /* Extentions.swift */; };
 		4C937C191F84AED400A54348 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C937C181F84AED400A54348 /* MessageCell.swift */; };
 		4C937C1B1F84AFB600A54348 /* InputMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C937C1A1F84AFB600A54348 /* InputMessageView.swift */; };
+		4CCF2A0C1F887A6D00B8AA91 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF2A0B1F887A6D00B8AA91 /* Helper.swift */; };
+		4CCF2A111F887C8A00B8AA91 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF2A101F887C8A00B8AA91 /* HomeViewModel.swift */; };
 		4CD0CE5E1F85492F00BE3E77 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD0CE5D1F85492F00BE3E77 /* MessageModel.swift */; };
-		4CD0CE621F8639F100BE3E77 /* MessageModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD0CE611F8639F100BE3E77 /* MessageModelTest.swift */; };
+		4CD0CE621F8639F100BE3E77 /* HelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD0CE611F8639F100BE3E77 /* HelperTest.swift */; };
 		71583710D669A2DCAF602966 /* Pods_TweeterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E893F9BC16523BB278F839 /* Pods_TweeterApp.framework */; };
 		97835EDBAAA41BCEFB30620B /* Pods_TweeterAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFF107D59B93473E6751723C /* Pods_TweeterAppTests.framework */; };
 		A970B4BBF17972AB69DE7C2C /* Pods_TweeterAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97473760F1C8C8A8EA3BFC59 /* Pods_TweeterAppUITests.framework */; };
@@ -63,8 +65,10 @@
 		4C937C141F84A61A00A54348 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		4C937C181F84AED400A54348 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		4C937C1A1F84AFB600A54348 /* InputMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMessageView.swift; sourceTree = "<group>"; };
+		4CCF2A0B1F887A6D00B8AA91 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		4CCF2A101F887C8A00B8AA91 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		4CD0CE5D1F85492F00BE3E77 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
-		4CD0CE611F8639F100BE3E77 /* MessageModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModelTest.swift; sourceTree = "<group>"; };
+		4CD0CE611F8639F100BE3E77 /* HelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperTest.swift; sourceTree = "<group>"; };
 		68E893F9BC16523BB278F839 /* Pods_TweeterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TweeterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8503D5235734D6C1B78195C4 /* Pods-TweeterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TweeterApp/Pods-TweeterApp.release.xcconfig"; sourceTree = "<group>"; };
 		8522543B2D9B1786DC61280F /* Pods-TweeterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeterApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TweeterApp/Pods-TweeterApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,9 +132,10 @@
 		4C937BD81F839A5600A54348 /* TweeterApp */ = {
 			isa = PBXGroup;
 			children = (
-				4C937C0D1F84A14400A54348 /* Models */,
 				4C937C0C1F84A13800A54348 /* Extensions */,
 				4C937C0B1F84A0B900A54348 /* Services */,
+				4CCF2A0D1F887C2100B8AA91 /* ViewModels */,
+				4C937C0D1F84A14400A54348 /* Models */,
 				4C937C0A1F84A0AA00A54348 /* ViewControllers */,
 				4C937BD91F839A5600A54348 /* AppDelegate.swift */,
 				4C937BDD1F839A5600A54348 /* Main.storyboard */,
@@ -146,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				4C937BF11F839A5600A54348 /* TweeterAppTests.swift */,
-				4CD0CE611F8639F100BE3E77 /* MessageModelTest.swift */,
+				4CD0CE611F8639F100BE3E77 /* HelperTest.swift */,
 				4C937BF31F839A5600A54348 /* Info.plist */,
 			);
 			path = TweeterAppTests;
@@ -172,6 +177,7 @@
 		4C937C0B1F84A0B900A54348 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4CCF2A0A1F887A0B00B8AA91 /* Helper */,
 				4C937C0E1F84A18400A54348 /* Theme */,
 			);
 			path = Services;
@@ -225,6 +231,30 @@
 				4C937C1A1F84AFB600A54348 /* InputMessageView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4CCF2A0A1F887A0B00B8AA91 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				4CCF2A0B1F887A6D00B8AA91 /* Helper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		4CCF2A0D1F887C2100B8AA91 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4CCF2A0E1F887C5F00B8AA91 /* HomeViewModel */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4CCF2A0E1F887C5F00B8AA91 /* HomeViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4CCF2A101F887C8A00B8AA91 /* HomeViewModel.swift */,
+			);
+			path = HomeViewModel;
 			sourceTree = "<group>";
 		};
 		4CD0CE5C1F85490F00BE3E77 /* Message */ = {
@@ -544,6 +574,8 @@
 				4C937BDA1F839A5600A54348 /* AppDelegate.swift in Sources */,
 				4CD0CE5E1F85492F00BE3E77 /* MessageModel.swift in Sources */,
 				4C937C151F84A61A00A54348 /* Extentions.swift in Sources */,
+				4CCF2A111F887C8A00B8AA91 /* HomeViewModel.swift in Sources */,
+				4CCF2A0C1F887A6D00B8AA91 /* Helper.swift in Sources */,
 				4C937C131F84A1FE00A54348 /* HomeViewController.swift in Sources */,
 				4C937C1B1F84AFB600A54348 /* InputMessageView.swift in Sources */,
 				4C937C191F84AED400A54348 /* MessageCell.swift in Sources */,
@@ -555,7 +587,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C937BF21F839A5600A54348 /* TweeterAppTests.swift in Sources */,
-				4CD0CE621F8639F100BE3E77 /* MessageModelTest.swift in Sources */,
+				4CD0CE621F8639F100BE3E77 /* HelperTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
