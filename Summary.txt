@@ -1,0 +1,18 @@
+Summary Tweeter application
+
+- Use Swift language and MVVM architecture to to this application.
+
+- Project includes five main parts: 
+	- ViewControllers: contain all of View Controllers.
+	- ViewModels: Contain all of Views's Model.
+	- Models: Contain all of Models.
+	- Extensions: Contains extention.
+	- Service (Theme, Helper): Contain managers (Theme class to help set Theme for app and Helper class to do special tasks.
+
+- This project was made 90% by coding, I just was using Storyboard to do Lauch Screen.
+
+- Features list:
+	- Eazy loading data from Database.
+	- Show messages.
+	- Allow user inputs, send new message and clears current message being written.
+	- Automatically split messages which are longer than 50 characters.
