@@ -60,7 +60,7 @@ class MessageCell: UITableViewCell {
             make.trailing.equalToSuperview().offset(-DefaultTheme.shareObject.common_margin())
             make.leading.equalToSuperview().offset(DefaultTheme.shareObject.common_margin())
             make.top.equalToSuperview().offset(DefaultTheme.shareObject.common_margin())
-            make.bottom.equalToSuperview().offset(-30)
+            make.bottom.equalTo(labelTime.snp.top)
         }
         
         labelTime.snp.makeConstraints { (make) in
@@ -74,6 +74,6 @@ class MessageCell: UITableViewCell {
     func reload(message: MessageModel) {
         self.labelText.text = message.message
         self.labelTime.text = message.date.timeAgoSinceDate(numericDates: true)
-        self.labelText.sizeToFit()
+        self.layoutIfNeeded()
     }
 }

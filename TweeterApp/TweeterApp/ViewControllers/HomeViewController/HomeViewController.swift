@@ -60,8 +60,7 @@ class HomeViewController: UIViewController {
                                 delegate: self,
                                 dataSource: self,
                                 separatorStyle: .none,
-                                bounces: true,
-                                rowHeight: UITableViewAutomaticDimension)
+                                bounces: true)
         tableView.transform = CGAffineTransform(rotationAngle: -(CGFloat)(Double.pi));
         tableView.register(MessageCell.self, forCellReuseIdentifier: "MessageCell")
         let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -183,6 +182,12 @@ extension HomeViewController: UITableViewDelegate{
             viewModel.fetchMoreData()
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let message = viewModel.getMessageModel(index: indexPath.row)
+        
+        return message.message.height(for: SCREEN_WIDTH() - 4 * DefaultTheme.shareObject.common_margin(), font: DefaultTheme.shareObject.font_primaryLight(size: .Small)) + 4 * DefaultTheme.shareObject.common_margin() + 30
     }
 }
 

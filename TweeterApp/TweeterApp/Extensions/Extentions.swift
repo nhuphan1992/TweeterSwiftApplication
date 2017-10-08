@@ -142,7 +142,7 @@ extension UITextField{
 }
 
 extension UITableView {
-    func setProperties(backgroundColor: UIColor = .white, allowsSelection: Bool = true, delegate: UITableViewDelegate? = nil, dataSource: UITableViewDataSource? = nil, separatorStyle: UITableViewCellSeparatorStyle = .none, bounces: Bool = true, rowHeight:CGFloat = 60, shouldShowScrollIndicator: Bool = false) {
+    func setProperties(backgroundColor: UIColor = .white, allowsSelection: Bool = true, delegate: UITableViewDelegate? = nil, dataSource: UITableViewDataSource? = nil, separatorStyle: UITableViewCellSeparatorStyle = .none, bounces: Bool = true, rowHeight:CGFloat = 90, shouldShowScrollIndicator: Bool = false) {
         self.allowsSelection = allowsSelection
         self.delegate = delegate
         self.dataSource = dataSource
