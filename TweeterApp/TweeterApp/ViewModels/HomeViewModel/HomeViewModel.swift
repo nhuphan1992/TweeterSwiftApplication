@@ -13,12 +13,13 @@ protocol HomeViewModelDelegate {
     func didChangeMessages(isAddingNewMessage: Bool)
     func willChangeMessages(isAddingNewMessage: Bool)
 }
+
 class HomeViewModel{
     private var offsetData = 0
     private let limitNumber = 200
-    var items = [MessageModel]()
+    private var items = [MessageModel]()
     var delegate: HomeViewModelDelegate? = nil
-    var isLoadingData = false
+    private var isLoadingData = false
     
     func getMessagesCount() -> Int {
         return items.count
@@ -65,5 +66,11 @@ class HomeViewModel{
                 self.delegate?.didChangeMessages(isAddingNewMessage: false)
             }
         }
+    }
+    
+    func isFetchedAllMessages() -> Bool {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.newBackgroundContext()
+        return MessageModel.countOfObjects(context: context) == items.count
     }
 }

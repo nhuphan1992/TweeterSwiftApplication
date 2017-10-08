@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+
 protocol InputMessageViewDelegate {
     func userFinishedInputingMessage(message:String)
 }

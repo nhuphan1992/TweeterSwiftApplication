@@ -71,4 +71,18 @@ class MessageModel {
             return []
         }
     }
+    
+    static func countOfObjects(context: NSManagedObjectContext) -> Int {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: tableName)
+        fetchRequest.resultType = .countResultType
+        do {
+            let count = try context.count(for: fetchRequest)
+            if count == NSNotFound {
+                return 0
+            }
+            return count
+        } catch {
+            return 0
+        }
+    }
 }

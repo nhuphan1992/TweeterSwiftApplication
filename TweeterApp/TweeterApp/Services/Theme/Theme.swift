@@ -283,5 +283,10 @@ class DefaultTheme: Theme {
     func text_PlaceHolder_Input_Message() -> String {
         return "Enter your message here."
     }
+    
+    func text_No_Message() -> String {
+        return "There are currently no message. Let's post something up now!"
+    }
+
 }
 

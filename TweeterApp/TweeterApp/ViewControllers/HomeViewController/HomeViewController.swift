@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     
     let tableView = UITableView()
     let inputMessageView = InputMessageView(frame: CGRect.zero)
+    let labelNoMessage = UILabel()
     
     let viewModel = HomeViewModel()
     var isAnimatingKeyboard: Bool = false
@@ -46,6 +47,7 @@ class HomeViewController: UIViewController {
     func setupViews() {
         self.view.backgroundColor = DefaultTheme.shareObject.color_App()
         self.view.addSubview(tableView)
+        self.view.addSubview(labelNoMessage)
         self.view.addSubview(inputMessageView)
         
         //View
@@ -70,6 +72,15 @@ class HomeViewController: UIViewController {
         
         //inputmessageview
         inputMessageView.delegate = self
+        
+        //labelNoMessage
+        labelNoMessage.setProperty(textAlign: .center,
+                                  textColor: DefaultTheme.shareObject.color_Text(),
+                                  font: DefaultTheme.shareObject.font_primaryLight(size: .Small),
+                                  numberLines: 2,
+                                  backgroundColor: UIColor.clear)
+        labelNoMessage.text = DefaultTheme.shareObject.text_No_Message()
+        labelNoMessage.isHidden = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -85,6 +96,12 @@ class HomeViewController: UIViewController {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-60)
+        }
+        self.labelNoMessage.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(DefaultTheme.shareObject.common_margin())
+            make.trailing.equalToSuperview().offset(-DefaultTheme.shareObject.common_margin())
+            make.height.equalTo(60)
+            make.centerY.equalToSuperview()
         }
     }
     
@@ -162,7 +179,7 @@ extension HomeViewController: UITableViewDelegate{
         cell.reload(message: viewModel.getMessageModel(index: indexPath.row))
         cell.transform = CGAffineTransform(rotationAngle:(CGFloat)(Double.pi));
 
-        if (indexPath.row == viewModel.getMessagesCount() - 1) {
+        if indexPath.row == viewModel.getMessagesCount() - 1 && viewModel.isFetchedAllMessages() == false {
             viewModel.fetchMoreData()
         }
         return cell
@@ -178,23 +195,24 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: HomeViewModelDelegate {
     func didChangeMessages(isAddingNewMessage: Bool) {
+        self.tableView.reloadData()
         if isAddingNewMessage {
             let firstIndex = IndexPath(item: 0, section: 0)
             self.tableView.scrollToRow(at: firstIndex, at: .middle, animated: true)
             self.inputMessageView.clear()
         } else {
-            self.tableView.tableFooterView?.isHidden = false
-            (self.tableView.tableFooterView as? UIActivityIndicatorView)?.startAnimating()
+            self.tableView.tableFooterView?.isHidden = true
+            (self.tableView.tableFooterView as? UIActivityIndicatorView)?.stopAnimating()
         }
-        self.tableView.reloadData()
+        labelNoMessage.isHidden = !(self.viewModel.getMessagesCount() == 0)
     }
     
     func willChangeMessages(isAddingNewMessage: Bool) {
         if isAddingNewMessage {
             // Do nothing
         } else {
-            self.tableView.tableFooterView?.isHidden = true
-            (self.tableView.tableFooterView as? UIActivityIndicatorView)?.stopAnimating()
+            self.tableView.tableFooterView?.isHidden = false
+            (self.tableView.tableFooterView as? UIActivityIndicatorView)?.startAnimating()
         }
     }
 }
