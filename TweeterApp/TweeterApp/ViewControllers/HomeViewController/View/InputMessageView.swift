@@ -53,29 +53,32 @@ class InputMessageView: UIView {
         btnDelete.setImage(UIImage(named: "icon_delete"), for: .normal)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
+    func setupLayout() {
         self.btnSend.snp.makeConstraints { (make) in
             make.width.equalTo(45)
             make.height.equalTo(45)
             make.trailing.equalToSuperview().offset(-DefaultTheme.shareObject.common_margin())
             make.centerY.equalToSuperview()
         }
-
+        
         self.btnDelete.snp.makeConstraints { (make) in
             make.width.equalTo(45)
             make.height.equalTo(45)
             make.trailing.equalTo(self.btnSend.snp.leading)
             make.centerY.equalToSuperview()
         }
-
+        
         self.textField.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(DefaultTheme.shareObject.common_margin())
             make.centerY.equalToSuperview()
             make.height.equalTo(30)
             make.trailing.equalTo(btnDelete.snp.leading).offset(0)
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.setupLayout()
     }
     
     

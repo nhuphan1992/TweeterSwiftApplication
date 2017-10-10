@@ -9,12 +9,21 @@
 import Foundation
 import UIKit
 
+protocol HomeViewModelProtocol {
+    func getMessagesCount() -> Int
+    func getMessageModel(index: Int) -> MessageModel
+    func save(messages: [String])
+    func fetchMoreData()
+    func isFetchedAllMessages() -> Bool
+}
+
 protocol HomeViewModelDelegate {
     func didChangeMessages(isAddingNewMessage: Bool)
     func willChangeMessages(isAddingNewMessage: Bool)
 }
 
-class HomeViewModel{
+class HomeViewModel: HomeViewModelProtocol {
+    
     private var offsetData = 0
     private let limitNumber = 200
     private var items = [MessageModel]()

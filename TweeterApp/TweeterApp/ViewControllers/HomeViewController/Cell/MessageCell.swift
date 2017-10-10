@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageCell: UITableViewCell {
+class MessageCell: UITableViewCell, MessageCellProtocol {
     let labelText = UILabel()
     let labelTime = UILabel()
     let viewcontainter = UIView()

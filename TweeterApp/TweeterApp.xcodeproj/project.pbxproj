@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C80406D1F8C5320007DAE1D /* MessageCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C80406C1F8C5320007DAE1D /* MessageCellProtocol.swift */; };
 		4C937BDA1F839A5600A54348 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C937BD91F839A5600A54348 /* AppDelegate.swift */; };
 		4C937BDF1F839A5600A54348 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C937BDD1F839A5600A54348 /* Main.storyboard */; };
 		4C937BE21F839A5600A54348 /* TweeterApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C937BE01F839A5600A54348 /* TweeterApp.xcdatamodeld */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		2B4058549CACAB9A4A15617A /* Pods-TweeterAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeterAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TweeterAppTests/Pods-TweeterAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		4C80406C1F8C5320007DAE1D /* MessageCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellProtocol.swift; sourceTree = "<group>"; };
 		4C937BD61F839A5600A54348 /* TweeterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweeterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C937BD91F839A5600A54348 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C937BDE1F839A5600A54348 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				4C937C181F84AED400A54348 /* MessageCell.swift */,
+				4C80406C1F8C5320007DAE1D /* MessageCellProtocol.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				4C937C151F84A61A00A54348 /* Extentions.swift in Sources */,
 				4CCF2A111F887C8A00B8AA91 /* HomeViewModel.swift in Sources */,
 				4CCF2A0C1F887A6D00B8AA91 /* Helper.swift in Sources */,
+				4C80406D1F8C5320007DAE1D /* MessageCellProtocol.swift in Sources */,
 				4C937C131F84A1FE00A54348 /* HomeViewController.swift in Sources */,
 				4C937C1B1F84AFB600A54348 /* InputMessageView.swift in Sources */,
 				4C937C191F84AED400A54348 /* MessageCell.swift in Sources */,
